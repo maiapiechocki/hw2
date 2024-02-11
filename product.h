@@ -19,7 +19,7 @@ public:
     /**
      * Allows for a more detailed search beyond simple keywords
      */
-    virtual bool isMatch(std::vector<std::string>& searchTerms) const;
+    //virtual bool isMatch(std::vector<std::string>& searchTerms) const;
 
     /**
      * Returns a string to display the product info for hits of the search
@@ -39,11 +39,12 @@ public:
     int getQty() const;
     void subtractQty(int num);
 
-protected:
+protected: //avail to class members and derived classes
     std::string name_;
     double price_;
     int qty_;
     std::string category_;
+    std::set<std::string> keys; // holds collection of unique strings stored in sorted order
 
 };
 #endif

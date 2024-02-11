@@ -43,10 +43,10 @@ int Product::getQty() const
  * default implementation...can be overriden in a future
  * assignment
  */
-bool Product::isMatch(std::vector<std::string>& searchTerms) const
+/*bool Product::isMatch(std::vector<std::string>& searchTerms) const
 {
     return false;
-}
+}*/
 
 void Product::dump(std::ostream& os) const
 {

@@ -15,7 +15,6 @@
  * DO NOT EDIT
  */
 
-
 class DataStore {
 public:
     virtual ~DataStore() { }
@@ -43,6 +42,6 @@ public:
     virtual void dump(std::ostream& ofile) = 0;
 
 
-};
 
+};
 #endif

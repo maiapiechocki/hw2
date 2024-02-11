@@ -9,7 +9,6 @@
 #include "db_parser.h"
 #include "util.h"
 
-
 using namespace std;
 
 
@@ -144,11 +143,14 @@ bool ProductSectionParser::parse(
         }
         lineno++;
         Product* p = parseProduct(category, is, lineno, errorMsg);
+        
         if(p != NULL) {
+          
             ds.addProduct(p);
             numRead_++;
         }
         else {
+          
             return true;
         }
     }
