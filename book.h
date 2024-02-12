@@ -14,21 +14,15 @@ public:
     ~Book();
 
     std::set<std::string> keywords() const;
-
-    //bool isMatch(std::vector<std::string>& searchTerms) const; //do i need?
-
+    //bool isMatch(std::vector<std::string>& searchTerms) const; 
     std::string displayString() const;
-
     void dump(std::ostream& os) const;
-
-    // Accessors
     std::string getAuthor() const; // const bc read-only info, can't modify objects
     std::string getISBN() const;
 
 private:
   std::string author_;
   std::string isbn_;
-    
-
+  
 };
 #endif

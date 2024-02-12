@@ -19,7 +19,7 @@ std::string size, std::string brand)
  // cout << brand_ << endl; 
 	std::set<std::string> set2 = parseStringToWords(brand_);
   
-  std::set<std::string>::iterator it1; // use typename to clarify that iterator is a type
+  std::set<std::string>::iterator it1; 
   // insert set
   #ifdef DEBUG2
   cout << "Keyword for brand: ";
@@ -67,9 +67,8 @@ std::string Clothing::displayString() const {
 // Outputs the product info in the database format
 void Clothing::dump(std::ostream& os) const
 {
-	Product::dump(os);
-	// cout << "dumping" << endl;
-  os << size_ << "\n" << brand_ <<  endl;
+	os << category_ << "\n" << name_ << "\n" << price_ << "\n" << qty_ << "\n" << 
+		size_ << "\n"  << brand_ << std::endl;
 }
 
 

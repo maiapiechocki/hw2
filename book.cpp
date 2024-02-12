@@ -9,7 +9,8 @@
 using namespace std;
 
 Book::Book(const std::string category, const std::string name, double price, int qty, std::string author, std::string isbn) 
-	: Product(category, name, price, qty), author_(author), isbn_(isbn) {
+	: Product(category, name, price, qty), 
+    author_(author), isbn_(isbn) {
 	
 }
 Book::~Book() {
@@ -20,24 +21,14 @@ Book::~Book() {
  */
 
 // Generates a set of keywords for a Book object.
-std::set<std::string> Book::keywords() const {
-    // Initialize an empty set to store the keywords.
+std::set<std::string> Book::keywords() const { // Use set keys = setUnion(s1,s2); 
     std::set<std::string> keys;
-
-    // Parse author's name into individual words and store them in a set.
     std::set<std::string> author = parseStringToWords(author_);
-    // Insert all words from the author's name into the keywords set.
     keys.insert(author.begin(), author.end());
-
-    // Parse book's title into individual words and store them in a set.
     std::set<std::string> title = parseStringToWords(name_);
-    // Insert all words from the book's title into the keywords set.
     keys.insert(title.begin(), title.end());
-
-    // Insert the book's ISBN directly into the keywords set.
     keys.insert(isbn_);
 
-    // Return the complete set of keywords for the book.
     return keys;
 }
 
@@ -63,7 +54,6 @@ void Book::dump(std::ostream& os) const {
   os << category_ << "\n" << name_ << "\n" << price_ << "\n" << qty_ << "\n" << isbn_ << "\n"  << author_ << endl;
 }
 
-//Accessors
 std::string Book::getAuthor() const {
   return author_;
 }

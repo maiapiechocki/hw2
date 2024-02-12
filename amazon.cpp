@@ -17,18 +17,13 @@
 #include "datastore.h"
 
 using namespace std;
-
-
 // Struct comparator to sort products by name
 struct ProdNameSorter {
     bool operator()(Product* p1, Product* p2) {
         return (p1->getName() < p2->getName());
     }
 };
-
-
 void displayProducts(vector<Product*>& hits);
-
 
 int main(int argc, char* argv[])
 {
@@ -86,8 +81,8 @@ int main(int argc, char* argv[])
                 vector<string> terms;
                 // Parse search terms
                 while(ss >> term) {
-                    term = convToLower(term); // Convert term to lowercase
-                    terms.push_back(term);
+                    term = convToLower(term);
+                    terms.push_back(term); 
                 }
                 // Perform search with AND logic
                 hits = ds.search(terms, 0);
@@ -121,7 +116,6 @@ int main(int argc, char* argv[])
               string user = "";
               size_t idx = 0;
               if (ss >> user) {
-                // verify ss working by printing
                 if (ss >> idx) {
                   if (idx <= hits.size() && idx > 0) {
                     ds.addToCart(user, hits[idx - 1]);
@@ -174,7 +168,6 @@ void displayProducts(vector<Product*>& hits)
         return;
     }
     // Display each hit
-    //std::sort(hits.begin(), hits.end(), ProdNameSorter());
     for(vector<Product*>::iterator it = hits.begin(); it != hits.end(); ++it) {
         cout << "Hit " << setw(3) << resultNo << endl;
         cout << (*it)->displayString() << endl;

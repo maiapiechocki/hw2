@@ -27,10 +27,8 @@ template <typename T>
 std::set<T> setUnion(std::set<T>& s1, std::set<T>& s2)
 {
 	typename std::set<T> setU;
-	// iterators for both sets
-	typename std::set<T>::iterator it1; // use typename to clarify that iterator is a type
+	typename std::set<T>::iterator it1; 
 	typename std::set<T>::iterator it2;
-  // insert set
 	for(it1 = s1.begin(); it1 != s1.end(); ++it1){
 		setU.insert(*it1);
 	}

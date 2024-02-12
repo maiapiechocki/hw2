@@ -92,8 +92,13 @@ vector<Product*> MyDataStore::search(vector<string>& terms, int type) {
 
         cout << "Performing AND search..." << endl;
         #endif
-        // initialize searchResults with first term's results or empty set
-        searchResults = pNameMap.find(terms[0]) != pNameMap.end() ? pNameMap[terms[0]] : set<Product*>();
+        // initialize searchResults based on whether the first term is found in the map
+      if (pNameMap.find(terms[0]) != pNameMap.end()) {
+          searchResults = pNameMap[terms[0]];
+      } else {
+          searchResults = set<Product*>();
+      }
+
             #ifdef DEBUG
 
         cout << "Set Checking: " << (pNameMap.find(terms[0]) != pNameMap.end()) << endl;
@@ -143,7 +148,6 @@ void MyDataStore::dump(ostream& ofile) {
     }
 
     ofile << "</products>\n";
-
     ofile << "<users>\n";
     for (set<User*>::iterator it = userList.begin(); it != userList.end(); ++it) {
         (*it)->dump(ofile);
@@ -175,32 +179,28 @@ void MyDataStore::printCart(string username) {
 }
 
 void MyDataStore::buyCart(std::string username) {
-  string lowercaseName = convToLower(username);
- if (cartMap.find(lowercaseName) == cartMap.end()) {
+  string lowerName = convToLower(username);
+ if (cartMap.find(lowerName) == cartMap.end()) {
    cout << "Invalid username" << endl;
  }
  else {
-   //finds the user associated with that username
    set<User*>::iterator it;
    User* u = nullptr;
    for (it = userList.begin(); it != userList.end(); ++it) {
-     if (((*it)->getName().compare(lowercaseName) == 0)) {
+     if (((*it)->getName().compare(lowerName) == 0)) {
        u = (*it);
        break;
      }
    }
 
-   //goes through the cart and continues buying as long as it is valid
-   //checks if the cart is not empty and if item is in stock
-   //and if the user has enough money
-    Product* currProd = nullptr;   //buffer for the products
-
-    while ((!cartMap.find(lowercaseName)->second.empty())) {
-      currProd = cartMap.find(lowercaseName)->second.front();
-      if (currProd->getQty() > 0 && (u->getBalance() - currProd->getPrice() > 0)) {
-        currProd->subtractQty(1);
-        u->deductAmount(currProd->getPrice());
-        cartMap.find(lowercaseName)->second.pop();
+    Product* p = nullptr; 
+    // continues to buy cart items
+    while ((!cartMap.find(lowerName)->second.empty())) {
+      p = cartMap.find(lowerName)->second.front();
+      if (p->getQty() > 0 && (u->getBalance() - p->getPrice() > 0)) {
+        p->subtractQty(1);
+        u->deductAmount(p->getPrice());
+        cartMap.find(lowerName)->second.pop();
       }
       else {
         return;
